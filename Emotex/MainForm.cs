@@ -26,10 +26,9 @@ namespace Emotex
         public MainForm()
         {
             InitializeComponent();
-
-            var store = new ModelStore();
-            _preprocessor = new TextPreprocessor(store, new EnglishStemmer());
-            _analyzer = new SentimentAnalyzer(_preprocessor, store);
+            
+            _preprocessor = new TextPreprocessor(new EnglishStemmer());
+            _analyzer = new SentimentAnalyzer(_preprocessor);
             _logs = new SortableBindingList<SentimentLog>();
 
             Helpers.ApplyStyle(ref dgvLogs);

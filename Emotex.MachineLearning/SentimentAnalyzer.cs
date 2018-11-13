@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Data;
 using System.Linq;
 using Accord.IO;
 using Accord.MachineLearning;
@@ -14,12 +13,10 @@ namespace Emotex.MachineLearning
         private BagOfWords _bagOfWords;
         private NaiveBayes _bayes;
         private readonly TextPreprocessor _preprocessor;
-        private readonly ModelStore _store;
 
-        public SentimentAnalyzer(TextPreprocessor preprocessor, ModelStore store)
+        public SentimentAnalyzer(TextPreprocessor preprocessor)
         {
             _preprocessor = preprocessor;
-            _store = store;
         }
 
         public SentimentResult Predict(string sentiment)
@@ -45,8 +42,8 @@ namespace Emotex.MachineLearning
 
             // load training data
             result.StartMeasure(TrainingResult.RecordType.LoadDataset);
-            var reader = new ExcelReader(_store.GetFilePath(ModelFileType.Dataset));
-            var dataStore = reader.GetWorksheet("Training");
+            var reader = new ExcelReader(Helpers.DatasetPath);
+            DataTable dataStore = reader.GetWorksheet("Training");
 
             int[] labels = dataStore.ToVector<int>("Label");
             string[] learnData = dataStore.ToVector<string>("Sentiment");
@@ -65,7 +62,7 @@ namespace Emotex.MachineLearning
 
             // vectorization of tokens
             result.StartMeasure(TrainingResult.RecordType.Featurization);
-            var featurized = _bagOfWords.Transform(tokenized).ToInt32();
+            int[][] featurized = _bagOfWords.Transform(tokenized).ToInt32();
             result.StopMeasure();
 
             // train
@@ -83,8 +80,8 @@ namespace Emotex.MachineLearning
 
             // load evaluation data
             result.StartMeasure(BenchmarkResult.RecordType.LoadDataset);
-            var reader = new ExcelReader(_store.GetFilePath(ModelFileType.Dataset));
-            var dataStore = reader.GetWorksheet("Evaluation");
+            var reader = new ExcelReader(Helpers.DatasetPath);
+            DataTable dataStore = reader.GetWorksheet("Evaluation");
 
             int[] labels = dataStore.ToVector<int>("Label");
             string[] learnData = dataStore.ToVector<string>("Sentiment");
@@ -97,12 +94,12 @@ namespace Emotex.MachineLearning
 
             // benchmark featurization
             result.StartMeasure(BenchmarkResult.RecordType.Featurization);
-            var xTestTokenized = _bagOfWords.Transform(tokenized).ToInt32();
+            int[][] learnTokenized = _bagOfWords.Transform(tokenized).ToInt32();
             result.StopMeasure();
 
             // benchmark classification
             result.StartMeasure(BenchmarkResult.RecordType.Classification);
-            var testResult = _bayes.Decide(xTestTokenized);
+            int[] testResult = _bayes.Decide(learnTokenized);
             result.StopMeasure();
 
             // calculate stats

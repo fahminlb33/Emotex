@@ -78,9 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers.cs" />
     <Compile Include="IExecutionRecorder.cs" />
-    <Compile Include="ModelFileType.cs" />
-    <Compile Include="ModelStore.cs" />
     <Compile Include="SentimentAnalyzer.cs" />
     <Compile Include="SentimentPolarity.cs" />
     <Compile Include="BenchmarkResult.cs" />

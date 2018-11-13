@@ -1,6 +1,7 @@
 ﻿extern alias accord;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using accord::Accord.MachineLearning.Text.Stemmers;
 using Accord.IO;
@@ -12,15 +13,13 @@ namespace Emotex.MachineLearning
     public class TextPreprocessor
     {
         private readonly StemmerBase _stemmer;
-        private readonly ModelStore _modelStore;
 
         public List<string> StopWords { get; set; }
         public bool StemWords { get; set; }
         public bool RemoveStopWords { get; set; }
 
-        public TextPreprocessor(ModelStore modelStore, StemmerBase stemmer)
+        public TextPreprocessor(StemmerBase stemmer)
         {
-            _modelStore = modelStore;
             _stemmer = stemmer;
             StopWords = new List<string>();
         }
@@ -60,11 +59,11 @@ namespace Emotex.MachineLearning
 
             return result.ToArray();
         }
-
+        
         public void Load()
         {
-            var reader = new ExcelReader(_modelStore.GetFilePath(ModelFileType.Dataset));
-            var workseet = reader.GetWorksheet("Stopwords");
+            var reader = new ExcelReader(Helpers.DatasetPath);
+            DataTable workseet = reader.GetWorksheet("Stopwords");
             StopWords = new List<string>(workseet.ToArray<string>("Word"));
         }
     }
