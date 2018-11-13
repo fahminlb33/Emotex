@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emotex", "Emotex\Emotex.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D98E2A3C-40A9-44E6-A9AC-74F4A18D074A}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
 		LICENSE.MD = LICENSE.MD
 		README.MD = README.MD
 	EndProjectSection

@@ -1,10 +1,8 @@
 Repositori ini merupakan kode sumber dari penelitian **Implementasi Sentiment Analysis Menggunakan Accord.NET dan Naive Bayes Classifier** yang dilombakan pada kegiatan Piala MIPA Universitas Pakuan 2018.
 
-# Emotex
+# Emotex [![Build Status](https://travis-ci.org/fahminlb33/Emotex.svg?branch=master)](https://travis-ci.org/fahminlb33/Emotex)
 
-Emotex merupakan aplikasi untuk melakukan sentiment analysis menggunakan Naive Bayes Classifier dan library Accord.NET.
-
-Aplikasi ini bersifat open-source dan dilisensikan di bawah MIT License.
+Emotex merupakan aplikasi untuk melakukan sentiment analysis menggunakan Naive Bayes Classifier dan library Accord.NET. Aplikasi ini bersifat open-source dan dilisensikan di bawah MIT License.
 
 ## Training dan Evaluasi
 
