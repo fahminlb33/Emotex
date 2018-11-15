@@ -81,7 +81,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="IExecutionRecorder.cs" />
     <Compile Include="SentimentAnalyzer.cs" />
-    <Compile Include="SentimentPolarity.cs" />
+    <Compile Include="Polarity.cs" />
     <Compile Include="EvaluationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SentimentResult.cs" />

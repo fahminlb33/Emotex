@@ -1,6 +1,6 @@
 ﻿namespace Emotex.MachineLearning
 {
-    public enum SentimentPolarity
+    public enum Polarity
     {
         Negative,
         Positive

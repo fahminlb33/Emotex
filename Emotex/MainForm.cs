@@ -104,7 +104,7 @@ namespace Emotex
             lblProbabilities.Text = string.Format("Negative: {0:P02},  Positive: {1:P02}", result.NegativeProbability, result.PositiveProbability);
             lblScores.Text = string.Format("Negative: {0:E2},  Positive: {1:E2}", result.NegativeScore,
                 result.PositiveScore);
-            if (result.Polarity == SentimentPolarity.Positive)
+            if (result.Polarity == Polarity.Positive)
             {
                 lblSentimentResult.Text = "Positive";
                 lblSentimentResult.BackColor = Color.FromArgb(35, 168, 109);

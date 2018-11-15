@@ -27,7 +27,7 @@ namespace Emotex.MachineLearning
 
             var scores = _bayes.Scores(featurized);
             var prob = _bayes.Probabilities(featurized);
-            result.Polarity = (SentimentPolarity) _bayes.Decide(featurized);
+            result.Polarity = _bayes.Decide(featurized) == 0 ? Polarity.Negative : Polarity.Positive;
             result.NegativeScore = scores[0];
             result.PositiveScore = scores[1];
             result.NegativeProbability = prob[0];
