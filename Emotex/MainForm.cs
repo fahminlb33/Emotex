@@ -74,7 +74,7 @@ namespace Emotex
             UpdateStatus("EVALUATING", DisplayPart.Status);
             Task.Run(() =>
             {
-                BenchmarkResult result = _analyzer.Benchmark();
+                EvaluationResult result = _analyzer.Evaluate();
                 _scatterplot = result.Roc.GetScatterplot(true);
 
                 UpdateStatus(result.GetDescription(), DisplayPart.Statistics);

@@ -5,7 +5,7 @@ using Accord.Statistics.Analysis;
 
 namespace Emotex.MachineLearning
 {
-    public class BenchmarkResult : IExecutionRecorder<BenchmarkResult.RecordType>
+    public class EvaluationResult : IExecutionRecorder<EvaluationResult.RecordType>
     {
         public enum RecordType
         {

@@ -74,12 +74,12 @@ namespace Emotex.MachineLearning
             return result;
         }
 
-        public BenchmarkResult Benchmark()
+        public EvaluationResult Evaluate()
         {
-            var result = new BenchmarkResult();
+            var result = new EvaluationResult();
 
             // load evaluation data
-            result.StartMeasure(BenchmarkResult.RecordType.LoadDataset);
+            result.StartMeasure(EvaluationResult.RecordType.LoadDataset);
             var reader = new ExcelReader(Helpers.DatasetPath);
             DataTable dataStore = reader.GetWorksheet("Evaluation");
 
@@ -88,22 +88,22 @@ namespace Emotex.MachineLearning
             result.StopMeasure();
 
             // tokenize
-            result.StartMeasure(BenchmarkResult.RecordType.Tokenization);
+            result.StartMeasure(EvaluationResult.RecordType.Tokenization);
             string[][] tokenized = learnData.Select(x => _preprocessor.Process(x)).ToArray();
             result.StopMeasure();
 
             // benchmark featurization
-            result.StartMeasure(BenchmarkResult.RecordType.Featurization);
+            result.StartMeasure(EvaluationResult.RecordType.Featurization);
             int[][] learnTokenized = _bagOfWords.Transform(tokenized).ToInt32();
             result.StopMeasure();
 
             // benchmark classification
-            result.StartMeasure(BenchmarkResult.RecordType.Classification);
+            result.StartMeasure(EvaluationResult.RecordType.Classification);
             int[] testResult = _bayes.Decide(learnTokenized);
             result.StopMeasure();
 
             // calculate stats
-            result.StartMeasure(BenchmarkResult.RecordType.Statistics);
+            result.StartMeasure(EvaluationResult.RecordType.Statistics);
             var mat = new ConfusionMatrix(testResult, labels);
             var roc = new ReceiverOperatingCharacteristic(labels, testResult.ToDouble());
             roc.Compute(200);
