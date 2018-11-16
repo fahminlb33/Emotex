@@ -11,7 +11,7 @@ Data set yang digunakan untuk training berasal dari repositori ML.NET yang berju
     Accuracy: 66,30%
     Sensitivity: 60,40%
     F1-score: 64,19%
-    AUC: 6,30%
+    AUC: 66,30%
 
 ## Asbtrak
 
